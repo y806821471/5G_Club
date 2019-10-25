@@ -1,0 +1,341 @@
+/* 阿里巴巴矢量图 */
+
+@import "iconfont.css";
+@font-face {
+  font-family: 'icon';
+  src: url('iconfont.ttf') format('truetype');
+}
+
+.icon {
+  position: relative;
+  font-family: "icon" !important;
+  font-size: 26px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+}
+
+/* reset museUi 主灰:#F4F2ED 浅灰:#A6A1A7 #7A7A7A  边线:#F3F3F3*/
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #151936;
+  font-size: 12px;
+  font-family: "PingFang SC", "Lantinghei SC", "Microsoft YaHei", "HanHei SC", "Helvetica Neue", "Open Sans", Arial, "Hiragino Sans GB", 微软雅黑, STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+  color: #CCE9FF;
+}
+
+a {
+  color: #CCE9FF;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+/* navbar */
+
+.van-nav-bar {
+  background-color: #151936;
+  padding-top: 20px;
+  height: 66px;
+}
+
+.van-nav-bar .van-nav-bar__right {
+  height: 45px;
+}
+
+.van-nav-bar .icon {
+  font-size: 20px;
+  color: #00B1FF;
+}
+
+.van-hairline--bottom::after {
+  border: 0;
+}
+
+.van-nav-bar__title {
+  color: #CCE9FF;
+}
+
+.van-nav-bar .van-icon {
+  color: #C1C6DB;
+}
+
+.van-nav-bar__right .van-icon {
+  color: #00B1FF;
+  font-size: 20px;
+}
+
+@media only screen and (min-width: 375px) and (min-height: 812px) {
+  /* .van-nav-bar{padding-top: 30px;} */
+  .mu-bottom-nav {
+    height: 60px;
+    height: 76px;
+  }
+}
+
+@media only screen and (min-width: 414px) and (min-height: 896px) {
+  .van-nav-bar {
+    padding-top: 30px;
+  }
+  .mu-bottom-nav {
+    height: 60px;
+    height: 76px;
+  }
+}
+
+/* bottom bar */
+
+.van-tabbar {
+  background-color: #151936;
+  box-shadow: 0px 1px 10px 1px rgba(49, 56, 108, 1);
+}
+
+.van-tabbar-item {
+  justify-content: flex-start;
+}
+
+.van-tabbar-item {
+  color: #085C9E;
+}
+
+.van-tabbar-item--active {
+  color: #fff;
+}
+
+.van-tabbar-item__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -5px;
+}
+
+.van-tabbar-item__text .icon {
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+[class*=van-hairline]::after {
+  border: 0;
+}
+
+/* 登陆注册忘记密码公共样式 */
+
+.logo {
+  text-align: center;
+  /* margin: 20px 0; */
+}
+
+.logo img {
+  margin-top: 5px;
+  width: 70px;
+}
+
+/* 表单公共样式 */
+
+.field-label {
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after {
+  border: 0;
+}
+
+.van-cell-group {
+  padding: 0;
+  background-color: #151936;
+}
+
+.van-cell {
+  background-color: #151936;
+  color: #BBD8EF;
+  padding: 18px 0;
+}
+
+.van-field__control {
+  color: #7DA3BF;
+  font-size: 12px
+}
+
+.van-field__control:disabled {
+  color: #7DA3BF;
+  font-size: 12px
+}
+
+.van-field__label {
+  width: auto;
+  min-width: 30px;
+  padding-right: 15px;
+}
+
+.van-cell::after {
+  position: absolute;
+  box-sizing: border-box;
+  content: ' ';
+  pointer-events: none;
+  right: 0;
+  bottom: 0;
+  left: 0!important;
+  right: 0;
+  border-bottom: 1px solid #244152!important;
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+}
+
+::-webkit-input-placeholder {
+  color: #7DA3BF!important;
+  font-size: 12px;
+}
+
+.van-field__right-icon, .all {
+  color: #6780A1;
+}
+
+.van-field__right-icon .van-icon {
+  font-size: 15px;
+}
+
+.common-btn {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(125, 197, 255, 1) 0%, rgba(0, 134, 255, 1) 100%);
+  border: 0;
+  border-radius: 20px;
+  height: 40px;
+  color: #fff;
+}
+
+.common-btn2 {
+  background: none;
+  box-shadow: inset 0px 1px 10px 0px rgba(3, 152, 255, 1);
+  color: #00B1FF;
+}
+
+/* 弹出框 */
+
+.van-dialog {
+  background: rgba(14, 56, 110, 1);
+  box-shadow: 0px 1px 23px 0px rgba(42, 154, 255, 1);
+  border: 1px solid rgba(0, 134, 255, 1);
+}
+
+.van-dialog .van-button--default {
+  background: rgba(14, 56, 110, 1);
+  color: #CCE9FF;
+}
+
+.van-dialog .van-dialog__confirm {
+  color: #00B1FF;
+}
+
+.van-dialog .van-hairline--top::after {
+  border-top: 1px solid #02A0EC;
+}
+
+.van-dialog .van-hairline--left::after {
+  border-left: 1px solid #02A0EC;
+}
+
+/* 底部弹出密码输入框 */
+
+.van-number-keyboard {
+  position: relative;
+  margin-top: 40px;
+}
+
+/* tab切换 */
+
+.tabs_box {
+  border: none !important;
+}
+
+.van-tab {
+  padding: 0;
+}
+
+.van-tabs .van-tabs__nav {
+  background: linear-gradient(90deg, rgba(16, 31, 63, 1) 0%, rgba(14, 62, 121, 1) 100%);
+  /* border: solid 0.5px #0B4586; */
+}
+
+.van-tabs .van-tab--active {
+  color: #00B1FF;
+}
+
+.van-tabs .van-tab {
+  color: #7DA3BF;
+}
+
+.van-tabs .van-tabs__line {
+  background-color: #00B1FF;
+}
+
+.van-loading span, .van-list__finished-text {
+  color: #7DA3BF!important;
+}
+
+/* 单选 */
+.van-radio__icon {
+  font-size: 12px;
+  color: #2053ec;
+  background-image: -webkit-linear-gradient(top, #2aa4e9, #2053ec);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.van-radio__label {
+  width: 100%;
+  color: #7DA3BF;
+  margin-left: 0;
+  padding-left: 5px;
+  text-align: left;
+  font-size: 13px;
+}
+
+.van-icon .van-icon-success {
+  font-size: 16px;
+  color :#7DA3BF;
+}
+.van-radio__icon--checked+i{
+  padding: 1%;
+}
+.van-radio__icon--checked+span {
+  /* background: #00B1FF; */
+  color: #cce9ff;
+}
+
+.van-grid-item__content {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.van-uploader__upload {
+  background-color: transparent;
+  border: 1px dashed #969799;
+  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+}
+
+/* 上传 */
+
+.van-uploader__input-wrapper {
+  width: 75px;
+  height: 75px;
+}
+
+.van-uploader__input-wrapper img {
+  width: 100%;
+  height: 100%;
+}
