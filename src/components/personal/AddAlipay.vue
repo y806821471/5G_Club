@@ -43,7 +43,7 @@ export default {
     };
   },
   created() {
-    this.getInfo();
+    // this.getInfo();
     if (parseInt(this.times) >= 3) {
       this.isAdd = true;
     }
@@ -52,24 +52,23 @@ export default {
     // routerBack() {
     //   this.$router.push("/Safety");
     // },
-    getInfo() {
-      const params = {
-        type: "2"
-      };
-      this.$http("/User/bankAdd", { params: params }).then(response => {
-        const res = response.data.data;
-        console.log(res)
-        if (!!res) {
-          this.validateForm.account = res.value.account;
-          this.qrCode = res.value.account_img;
-        }
-      });
-    },
+    // getInfo() {
+    //   const params = {
+    //     type: "2"
+    //   };
+    //   this.$http.post("/User/bankAdd", { params: params }).then(response => {
+    //     const res = response.data.data;
+    //     console.log(res)
+    //     if (!!res) {
+    //       this.validateForm.account = res.value.account;
+    //       this.qrCode = res.value.account_img;
+    //     }
+    //   });
+    // },
     //上传图片
     doUpload(e) {
       this.$http.post("/Index/oss").then(response => {
-        console.log(response);
-        
+        // console.log(response);
         const res = response.data.data;
         let OSS = require("ali-oss");
         let file = e.target.files[0];
@@ -114,9 +113,12 @@ export default {
       }
       const formData = {
         type: "2",
-        value: { account: this.validateForm.account, account_img: this.qrCode }
+        account: this.validateForm.account, 
+        account_img: this.qrCode 
       };
       this.$http.post("/User/bankAdd", formData).then(response => {
+        console.log(response);
+        
         this.$toast(response.data.msg);
         if (response.data.status === 200) {
           this.times++;

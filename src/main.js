@@ -21,8 +21,8 @@ Vue.use(VueClipboard)
 Vue.prototype.routerBack = function () {
     router.back();
 }
-// axios.defaults.baseURL = 'http://api.haibiter.com';
-axios.defaults.baseURL = 'https://api.zhongchuang58.com/';
+// axios.defaults.baseURL = 'https://api.zhongchuang58.com/';
+axios.defaults.baseURL = 'http://api5g.apoiion.cn/';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 const token = localStorage.getItem('accessToken') || '';
 axios.defaults.headers.token = token;

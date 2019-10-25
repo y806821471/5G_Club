@@ -30,26 +30,26 @@ export default {
     };
   },
   created() {
-    this.getInfo();
+    // this.getInfo();
     if (parseInt(this.times) >= 3) {
       this.isAdd = true;
     }
   },
   methods: {
-    getInfo() {
-      const params = {
-        type: "3"
-      };
-      this.$http.post("/User/bankAdd", { params: params }).then(response => {
-        const res = response.data.data;
-        console.log(res);
-        if (!!res) {
-          this.validateForm.name = res.value.bank_name;
-          this.validateForm.openingBank = res.value.bank_location;
-          this.validateForm.cardId = res.value.bank_account;
-        }
-      });
-    },
+    // getInfo() {
+    //   const params = {
+    //     type: "3"
+    //   };
+    //   this.$http.post("/User/bankAdd", { params: params }).then(response => {
+    //     const res = response.data.data;
+    //     console.log(res);
+    //     if (!!res) {
+    //       this.validateForm.name = res.value.bank_name;
+    //       this.validateForm.openingBank = res.value.bank_location;
+    //       this.validateForm.cardId = res.value.bank_account;
+    //     }
+    //   });
+    // },
     submit() {
       if (this.validateForm.name.trim() === "") {
         this.$toast("请输入持卡人姓名");
@@ -65,14 +65,14 @@ export default {
       }
       const formData = {
         type: "3",
-        value: {
-          name: this.validateForm.name,
-          bank: this.validateForm.openingBank,
-          account: this.validateForm.cardId
-        }
+        bank_name: this.validateForm.name,
+        bank_location: this.validateForm.openingBank,
+        bank_account: this.validateForm.cardId
       };
       this.$http.post("/User/bankAdd", formData).then(response => {
         this.$toast(response.data.msg);
+        console.log(response);
+
         if (response.data.status === 200) {
           this.times++;
           localStorage.setItem("bankTimes", this.times);
@@ -90,17 +90,20 @@ export default {
   color: #01a5f0;
   padding: 15px 5%;
   font-size: 13px;
-
 }
 .van-cell-group {
   padding: 0px 5% 20px 5%;
 }
 .van-cell {
-  padding:8px  0;
+  padding: 8px 0;
 }
 .common-btn {
   margin-top: 40px;
-  background:linear-gradient(180deg,rgba(42,164,233,1) 0%,rgba(32,83,236,1) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(42, 164, 233, 1) 0%,
+    rgba(32, 83, 236, 1) 100%
+  );
 }
 .title {
   margin-top: 20px;

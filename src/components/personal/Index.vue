@@ -16,7 +16,7 @@
       </div>
       <div class="info_right icon" @click="dropOut">&#xe6bb;</div>
     </div>
-    <div  class="asset">
+    <div class="asset">
       <div class="asset_content">
         <p>{{userInfo.money}}</p>
         <p>娱乐币</p>
@@ -26,11 +26,11 @@
         <p>娱乐股</p>
       </div>
       <div class="asset_content">
-        <p>11:11</p>
+        <p>{{userInfo.app_money}}</p>
         <p>应用币</p>
       </div>
       <div class="asset_content">
-        <p>22:22</p>
+        <p>{{userInfo.stock_money}}</p>
         <p>股权币</p>
       </div>
     </div>
@@ -112,9 +112,7 @@ export default {
       this.$http("User/info").then(response => {
         console.log(response.data.data);
         this.userInfo = response.data.data;
-        this.gameCoinMoney = this.userInfo.money;
         // console.log(this.userInfo)
-        localStorage.setItem("gameCoin", this.gameCoinMoney);
       });
     }
   }
@@ -128,7 +126,7 @@ export default {
   color: #00b1ff;
 }
 .info {
-  padding:10px 30px 0px 30px;
+  padding: 10px 30px 0px 30px;
   color: #7da3bf;
   font-size: 13px;
   display: flex;
@@ -163,20 +161,20 @@ export default {
   justify-content: center;
   text-align: center;
 }
-.asset{
+.asset {
   display: flex;
   justify-content: space-between;
   margin: 15px;
   padding: 25px;
   border-radius: 5px;
-  box-shadow: inset 0px 0px 25px #17A2FF;
+  box-shadow: inset 0px 0px 25px #17a2ff;
 }
-.asset_content{
+.asset_content {
   text-align: center;
   font-size: 13px;
-  color: #7DA3BF;
+  color: #7da3bf;
 }
-.asset_content p:nth-child(1){
+.asset_content p:nth-child(1) {
   color: #00b1ff;
   margin-bottom: 10px;
 }
@@ -197,7 +195,7 @@ export default {
   padding: 15px 4%;
   border-bottom: solid 1px #0c4586;
 }
-.list li:first-child{
+.list li:first-child {
   border-top: solid 1px #0c4586;
 }
 .list .left {

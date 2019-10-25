@@ -8,7 +8,7 @@
         <div class="list_hd">
           <div class="left">
             <span style="margin-right:10px">娱乐币</span>
-            <span class="num">0.00</span>
+            <span class="num">{{userInfo.money}}</span>
           </div>
           <div class="right" @click="goFinancial">
             <span>财务明细</span>
@@ -25,7 +25,7 @@
       <li class="ore-item">
         <div class="list_hd">
           <div class="left">
-            <span class="num">0.00</span>
+            <span class="num">{{userInfo.stock_money}}</span>
           </div>
           <div class="right" @click="goFinancial">
             <span>财务明细</span>
@@ -41,7 +41,7 @@
       <li class="ore-item">
         <div class="list_hd">
           <div class="left">
-            <span class="num">0.00</span>
+            <span class="num">{{userInfo.app_money}}</span>
           </div>
           <div class="right" @click="goFinancial">
             <span>财务明细</span>
@@ -57,7 +57,7 @@
       <li class="ore-item">
         <div class="list_hd">
           <div class="left">
-            <span class="num">0.00</span>
+            <span class="num">{{userInfo.money_lock}}</span>
           </div>
           <div class="right" @click="goFinancial">
             <span>财务明细</span>
@@ -76,9 +76,23 @@
 <script>
 export default {
   data () {
-    return {};
+    return {
+       userInfo: {},
+    };
+  },
+  created(){
+    this.getUserInfo()
   },
   methods: {
+    // 用户信息
+    getUserInfo() {
+      this.$http("User/info").then(response => {
+        console.log(response.data.data);
+        this.userInfo = response.data.data;
+        console.log(this.userInfo)
+
+      });
+    },
     routerBack () {
       this.$router.push("/Home");
     },

@@ -3,15 +3,21 @@
     <!-- 头部 -->
     <van-nav-bar left-arrow title="提现" @click-left="routerBack" />
     <!-- tab切换>>已添加收款账户 -->
-    <van-tabs v-model="active" line-width="30px" background="#151936" title-active-color="#00B1FF" v-if="">
-      <div></div>
+    <van-tabs
+      v-model="active"
+      line-width="30px"
+      background="#151936"
+      title-active-color="#00B1FF"
+      @click="onClick"
+      v-if="payInfo.account"
+    >
       <!-- 支付宝充值 -->
       <van-tab title="支付宝提现">
         <div class="account_ZFB">
           <div>收款账号</div>
           <div>
             <span>支付宝账号：</span>
-            <span>12344567787</span>
+            <span>{{payInfo.account}}</span>
           </div>
         </div>
       </van-tab>
@@ -21,41 +27,41 @@
           <p>收款账号</p>
           <div>
             <span>姓名：</span>
-            <span>张三</span>
+            <span>{{payInfo.bank_name}}</span>
           </div>
           <div>
             <span>银行：</span>
-            <span>中国银行长沙支行</span>
+            <span>{{payInfo.bank_location}}</span>
           </div>
           <div>
             <span>账号：</span>
-            <span>332364637373374</span>
+            <span>{{payInfo.bank_account}}</span>
           </div>
         </div>
       </van-tab>
       <div class="num">
         <span>可提娱乐币：</span>
-        <span>1200</span>
+        <span>{{userInfo.money}}</span>
         <div class="color">提现时间为09:00-18:00,申请提现后两小时内到账</div>
       </div>
       <van-cell-group>
         <div class="input_title">提现金额：</div>
-        <van-field v-model="money" placeholder="请输入您要充值的金额" />
+        <van-field v-model="validateForm.number" placeholder="请输入您要充值的金额" />
         <div class="input_title">交易密码：</div>
-        <van-field v-model="password" type="password" placeholder="请输入交易密码" />
+        <van-field v-model="validateForm.password" type="password" placeholder="请输入交易密码" />
         <div class="cost">
           <span>手续费：</span>
           <span>200</span>
           <span>&nbsp;娱乐币</span>
         </div>
         <div class="confirm">
-          <van-button round type="info" size="large">申请提现</van-button>
+          <van-button round type="info" size="large"  @click="submit">申请提现</van-button>
         </div>
       </van-cell-group>
     </van-tabs>
 
     <!-- tab切换>>未添加收款账户 -->
-    <van-tabs v-model="active2" line-width="30px" background="#151936" title-active-color="#00B1FF">
+    <van-tabs v-model="active2" line-width="30px" background="#151936" title-active-color="#00B1FF" v-else>
       <van-tab title="支付宝提现">
         <div class="num2">
           <span>可提娱乐币：</span>
@@ -88,13 +94,82 @@
 export default {
   data() {
     return {
+      userInfo: {},
       active: 0,
-      active2: 0,
-      money: "",
-      password: ""
+      validateForm: {
+        number: "",
+        password: ""
+      },
+      payInfo: {
+        account: "", //支付宝账号
+        account_img: "", //支付宝收款码
+        bank_name: "", //银行卡姓名
+        bank_location: "", //开户行
+        bank_account: "" //银行卡卡号
+      },
+      active2: 0
     };
   },
+  created() {
+    this.getUserInfo();
+    this.getInfo(2);
+  },
   methods: {
+    // 用户信息
+    getUserInfo() {
+      this.$http("User/info").then(response => {
+        this.userInfo = response.data.data;
+      });
+    },
+    onClick(index, title) {
+      if (!this.payInfo.account && this.active == 0) {
+        this.getInfo(2);
+      }
+      if (!this.payInfo.bank_location && this.active == 1) {
+        this.getInfo(3);
+      }
+    },
+    // 支付宝/银行卡信息获取
+    getInfo(type) {
+      const params = {
+        type: type
+      };
+      this.$http("/User/bankList", { params: params }).then(response => {
+        const res = response.data.data;
+        console.log(res);
+         if (!!res && type === 2) {
+          this.payInfo.account = res[0].account;
+        } else if (!!res && type ===3) {
+          this.payInfo.bank_name = res[0].bank_name;
+          this.payInfo.bank_location = res[0].bank_location;
+          this.payInfo.bank_account = res[0].bank_account;
+
+        }
+      });
+    },
+    // 提交
+        submit() {
+      if(Number(this.validateForm.number) <= 0) {
+        this.$toast('请输入正确的数量');
+        return;
+      }
+      if(!(/^\d{6}$/.test(this.validateForm.password))){
+        this.$toast('交易密码为六位数字');
+        return;
+      }
+      const formData = {
+        type: this.active+2,
+        num: this.validateForm.number,
+        trade: this.validateForm.password,
+      };
+      this.$http.post("/User/withdraw", formData).then(response => {
+        const res = response.data;
+        this.$toast(res.msg);
+        if(res.status === 200) {
+          this.$router.back();
+        }
+      });
+    },
     routerBack() {
       this.$router.push("/Myproperty");
     },

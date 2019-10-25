@@ -10,8 +10,8 @@
           </div>
         </div>
         <div class="right">
-          <span class="center">未添加</span>
-          <span class="center2">已添加</span>
+          <span class="center2" v-if="!allStatus.account">已添加</span>
+          <span class="center" v-else>未添加</span>
           <span class="icon">&#xe695;</span>
         </div>
       </router-link>
@@ -23,8 +23,8 @@
           </div>
         </div>
         <div class="right">
-          <span class="center">未添加</span>
-          <span class="center2">已添加</span>
+         <span class="center2" v-if="!allStatus.account">已添加</span>
+          <span class="center" v-else>未添加</span>
           <span class="icon">&#xe695;</span>
         </div>
       </router-link>
@@ -62,20 +62,20 @@
 export default {
   data() {
     return {
-      info: []
+       allStatus: {},
     };
   },
   created() {
-    // this.getServices();
+    this.getInfo();
   },
   methods: {
-    // 列表
-    // getServices() {
-    //   this.$http.post("/index/aboutus").then(response => {
-    //     // console.log(response.data.data)
-    //     this.services = response.data.data;
-    //   });
-    // },
+    getInfo() {
+      this.$http("/User/bankList").then(response => {
+        const res = response.data.data;
+        console.log(res);
+        this.allStatus = res;
+      });
+    },
     routerBack() {
       this.$router.push("/Personal");
     }
@@ -126,9 +126,9 @@ export default {
 .center {
   font-size: 13px;
 }
-.center2{
- font-size: 13px;
- color: #7DA3BF;
+.center2 {
+  font-size: 13px;
+  color: #7da3bf;
 }
 .list .right {
   display: flex;
